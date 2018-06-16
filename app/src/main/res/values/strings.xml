@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">TrackYourEC</string>
+    <string name="title_activity_enrolled_courses">EnrolledCoursesActivity</string>
+    <string name="btn_add_course">Available courses</string>
+    <string name="btn_graded_courses">Graded courses</string>
+    <string name="btn_add_grade">Add grade</string>
+    <string name="btn_send">Send</string>
+    <string name="course_name">Course name</string>
+    <string name="course_grade">Grade</string>
+    <string name="course_year">Year</string>
+    <string name="course_ects">ECTS</string>
+    <string name="course_term">Term</string>
+    <string name="course_elective">Elective</string>
+    <string name="course_abbr">Course abbreviation</string>
+</resources>

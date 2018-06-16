@@ -1,0 +1,107 @@
+{
+  "project_info": {
+    "project_number": "911540100292",
+    "firebase_url": "https://study-with-hinako.firebaseio.com",
+    "project_id": "study-with-hinako",
+    "storage_bucket": "study-with-hinako.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:911540100292:android:95232d11654f0776",
+        "android_client_info": {
+          "package_name": "nl.hinakoogawa.studieloopbaanapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "911540100292-lsoc4bq3f81cgrsbl59q64omue2vhol7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "nl.hinakoogawa.studieloopbaanapp",
+            "certificate_hash": "b08ead506cc990944b103928ff54db3edb5666d7"
+          }
+        },
+        {
+          "client_id": "911540100292-rqj8tmhki0238g85gt695jcdd7pp1h1e.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "911540100292-rqj8tmhki0238g85gt695jcdd7pp1h1e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzvgfh-pxR9ZJpHmwprfcEXAaFFUq6R3o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "911540100292-rqj8tmhki0238g85gt695jcdd7pp1h1e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:911540100292:android:685f197ce182b60e",
+        "android_client_info": {
+          "package_name": "nl.hinakoogawa.trackyourec"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "911540100292-ltgefn4umtmh3flnqh52dpi5flekuaq5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "nl.hinakoogawa.trackyourec",
+            "certificate_hash": "b08ead506cc990944b103928ff54db3edb5666d7"
+          }
+        },
+        {
+          "client_id": "911540100292-rqj8tmhki0238g85gt695jcdd7pp1h1e.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "911540100292-rqj8tmhki0238g85gt695jcdd7pp1h1e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzvgfh-pxR9ZJpHmwprfcEXAaFFUq6R3o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "911540100292-rqj8tmhki0238g85gt695jcdd7pp1h1e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#00a9f4</color>
+    <color name="colorPrimaryDark">#007ac1</color>
+    <color name="colorAccent">#e91e63</color>
+
+    <color name="ic_colorPrimaryDark">#65007ac1</color>
+    <color name="passing_grade">#a3ffb0</color>
+    <color name="failing_grade">#ff7a7a</color>
+</resources>
