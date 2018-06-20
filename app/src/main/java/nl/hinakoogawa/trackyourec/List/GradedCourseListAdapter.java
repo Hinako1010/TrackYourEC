@@ -1,6 +1,7 @@
 package nl.hinakoogawa.trackyourec.List;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import java.util.List;
 
 import nl.hinakoogawa.trackyourec.R;
 import nl.hinakoogawa.trackyourec.models.CourseModel;
+
+import static android.content.ContentValues.TAG;
 
 public class GradedCourseListAdapter extends ArrayAdapter<CourseModel> {
     public GradedCourseListAdapter(Context context, int resource, List<CourseModel> objects){
@@ -43,26 +46,21 @@ public class GradedCourseListAdapter extends ArrayAdapter<CourseModel> {
         vh.year.setText((CharSequence) "year: " + cm.getYear());
         vh.term.setText((CharSequence) "term: " + cm.getTerm());
         vh.ects.setText((CharSequence) "EC: " + cm.getEcts());
-        if (cm.getGrade() != null){
-            vh.grade.setText((CharSequence) "grade: " + cm.getGrade());
-            if (Double.parseDouble(cm.getGrade()) < 5.5){
-                // background red
-                vh.grade.setText((CharSequence) "ONVOLDOENDE");
-                vh.rowFirst.setBackgroundResource(R.color.failing_grade);
-                vh.rowSecond.setBackgroundResource(R.color.failing_grade);
-            } else {
-                //background green
-                vh.rowFirst.setBackgroundResource(R.color.passing_grade);
-                vh.rowSecond.setBackgroundResource(R.color.passing_grade);
-            }
+        vh.grade.setText((CharSequence) "grade: " + cm.getGrade());
+        if (Double.parseDouble(cm.getGrade()) < 5.5){
+            // background red
+            vh.rowFirst.setBackgroundResource(R.color.failing_grade);
+            vh.rowSecond.setBackgroundResource(R.color.failing_grade);
+        } else {
+            //background green
+            vh.rowFirst.setBackgroundResource(R.color.passing_grade);
+            vh.rowSecond.setBackgroundResource(R.color.passing_grade);
         }
         if (Boolean.parseBoolean(cm.getElective())){
             vh.elective.setText((CharSequence) "Elective");
         } else {
             vh.elective.setText((CharSequence) "Mandatory");
         }
-
-
 
         return convertView;
     }

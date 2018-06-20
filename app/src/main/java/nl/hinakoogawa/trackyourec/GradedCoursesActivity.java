@@ -9,6 +9,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import nl.hinakoogawa.trackyourec.List.AvailableCourseListAdapter;
@@ -53,10 +54,13 @@ public class GradedCoursesActivity extends AppCompatActivity {
             Integer term = results.getInt(results.getColumnIndexOrThrow(DatabaseInfo.CourseColumn.TERM));
             Double grade = results.getDouble(results.getColumnIndexOrThrow(DatabaseInfo.CourseColumn.GRADE));
             Boolean elective = Boolean.parseBoolean(results.getString(results.getColumnIndexOrThrow(DatabaseInfo.CourseColumn.ELECTIVE)));
-            courseModels.add(new CourseModel(name, ects, grade, year , term, elective, " "));
+            if (grade > 0){
+                courseModels.add(new CourseModel(name, ects, grade, year , term, elective, " "));
+            }
         }
         results.close();
 
+        Collections.sort(courseModels);
         mAdapter = new GradedCourseListAdapter(GradedCoursesActivity.this, 0, courseModels);
         mListView.setAdapter(mAdapter);
 

@@ -4,12 +4,15 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
 import nl.hinakoogawa.trackyourec.database.DatabaseHelper;
+import nl.hinakoogawa.trackyourec.filters.InputFilterMinMax;
+import nl.hinakoogawa.trackyourec.filters.InputFilterMinMaxDouble;
 import nl.hinakoogawa.trackyourec.models.CourseModel;
 
 public class AddCourseActivity extends AppCompatActivity {
@@ -40,6 +43,11 @@ public class AddCourseActivity extends AppCompatActivity {
                 EditText g = (EditText) findViewById(R.id.course_grade);
                 EditText y = (EditText) findViewById(R.id.course_year);
                 EditText t = (EditText) findViewById(R.id.course_term);
+                ec.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "10")});
+                g.setFilters(new InputFilter[]{ new InputFilterMinMaxDouble("1", "10")});
+                y.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "4")});
+                t.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "4")});
+
 
                 String name = n.getText().toString();
                 Integer ects = Integer.parseInt(ec.getText().toString());

@@ -1,7 +1,9 @@
 package nl.hinakoogawa.trackyourec.models;
 
 
-public class CourseModel {
+import android.support.annotation.NonNull;
+
+public class CourseModel implements Comparable<CourseModel> {
 
     private String coursename;
     private Integer ects;
@@ -47,5 +49,11 @@ public class CourseModel {
 
     public String getNotes(){
         return String.valueOf(notes);
+    }
+
+    @Override
+    public int compareTo(CourseModel course) {
+        int compareYear = Integer.parseInt(course.getYear());
+        return this.year - compareYear;
     }
 }

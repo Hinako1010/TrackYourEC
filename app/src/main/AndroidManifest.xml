@@ -16,17 +16,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AvailableCoursesActivity"
-            android:parentActivityName="nl.hinakoogawa.trackyourec.MainActivity"
+        <activity
+            android:name=".AvailableCoursesActivity"
             android:noHistory="true"
-            />
-        <activity android:name=".AddCourseActivity"
-            android:parentActivityName="nl.hinakoogawa.trackyourec.AvailableCoursesActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".AddCourseActivity"
             android:noHistory="true"
-        />
-        <activity android:name=".GradedCoursesActivity"
-            android:parentActivityName="nl.hinakoogawa.trackyourec.MainActivity"
-        />
+            android:parentActivityName=".AvailableCoursesActivity" />
+        <activity
+            android:name=".GradedCoursesActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".ProgressActivity" />
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
     </application>
 
 </manifest>
