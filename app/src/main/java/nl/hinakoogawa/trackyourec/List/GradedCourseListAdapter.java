@@ -37,6 +37,7 @@ public class GradedCourseListAdapter extends ArrayAdapter<CourseModel> {
             vh.elective = (TextView) convertView.findViewById(R.id.cont_course_elective);
             vh.rowFirst = (LinearLayout) convertView.findViewById(R.id.row_first);
             vh.rowSecond = (LinearLayout) convertView.findViewById(R.id.row_second);
+            vh.notes = (TextView) convertView.findViewById(R.id.cont_course_notes);
             convertView.setTag(vh);
         } else {
             vh = (ViewHolder) convertView.getTag();
@@ -51,16 +52,20 @@ public class GradedCourseListAdapter extends ArrayAdapter<CourseModel> {
             // background red
             vh.rowFirst.setBackgroundResource(R.color.failing_grade);
             vh.rowSecond.setBackgroundResource(R.color.failing_grade);
+            vh.notes.setBackgroundResource(R.color.failing_grade);
+
         } else {
             //background green
             vh.rowFirst.setBackgroundResource(R.color.passing_grade);
             vh.rowSecond.setBackgroundResource(R.color.passing_grade);
+            vh.notes.setBackgroundResource(R.color.passing_grade);
         }
         if (Boolean.parseBoolean(cm.getElective())){
             vh.elective.setText((CharSequence) "Elective");
         } else {
             vh.elective.setText((CharSequence) "Mandatory");
         }
+        vh.notes.setText((CharSequence) "notes: " + cm.getNotes());
 
         return convertView;
     }
@@ -74,5 +79,6 @@ public class GradedCourseListAdapter extends ArrayAdapter<CourseModel> {
         TextView grade;
         LinearLayout rowFirst;
         LinearLayout rowSecond;
+        TextView notes;
     }
 }

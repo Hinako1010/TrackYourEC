@@ -22,14 +22,6 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
         <TextView
-            android:id="@+id/cont_course_elective"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/course_elective"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-        <TextView
             android:id="@+id/cont_course_ects"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

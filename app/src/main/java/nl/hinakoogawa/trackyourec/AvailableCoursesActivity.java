@@ -1,18 +1,26 @@
 package nl.hinakoogawa.trackyourec;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,7 +43,11 @@ public class AvailableCoursesActivity extends AppCompatActivity {
     private AvailableCourseListAdapter mAdapter;
     private List<CourseModel> courseModels = new ArrayList<>();
     // WE MAY NEED A METHOD TO FILL THIS. WE COULD RETRIEVE THE DATA FROM AN ONLINE JSON SOURCE
-    private String m_Text = "";
+    private String m_Grade = "";
+    private String m_Notes = "";
+    private Toolbar toolbar;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,72 +55,16 @@ public class AvailableCoursesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_available_courses);
 
-        final DatabaseHelper dbHelper = DatabaseHelper.getHelper(AvailableCoursesActivity.this);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        mListView = (ListView) findViewById(R.id.available_list_view);
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                 @Override
-                 public void onItemClick(final AdapterView<?> adapterView, final View view, int position, long l) {
-                     AlertDialog.Builder builder = new AlertDialog.Builder(AvailableCoursesActivity.this);
-                     builder.setTitle("Grade");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-                    // Set up the input
-                     final EditText input = new EditText(AvailableCoursesActivity.this);
-                     // Specify the type of input expected; decimal number
-                     input.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER);
-                     input.setFilters(new InputFilter[]{ new InputFilterMinMaxDouble("1", "10")});
-                     builder.setView(input);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
 
-                    // Set up the buttons
-                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                         @Override
-                         public void onClick(DialogInterface dialog, int which) {
-                             m_Text = input.getText().toString();
-                             ContentValues cv = new ContentValues();
-                             cv.put("grade", m_Text);
-                             TextView textView = (TextView) view.findViewById(R.id.cont_course_name);
-                             String coursename = textView.getText().toString();
-                             String[] args = {coursename};
-                             dbHelper.update(DatabaseInfo.CourseTables.COURSETABLE, cv, "coursename=?", args);
-                             finish();
-                             startActivity(getIntent());
-                         }
-                     });
-                     builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                         @Override
-                         public void onClick(DialogInterface dialog, int which) {
-                             dialog.cancel();
-                         }
-                     });
-
-                     builder.show();
-                 }
-             }
-        );
-
-        Cursor results = dbHelper.getAllCourses();
-        List itemIds = new ArrayList<>();
-        while(results.moveToNext()) {
-            long itemId = results.getLong(
-                    results.getColumnIndexOrThrow(DatabaseInfo.CourseColumn._ID));
-            itemIds.add(itemId);
-            String name = results.getString(results.getColumnIndexOrThrow(DatabaseInfo.CourseColumn.COURSENAME));
-            Integer ects = results.getInt(results.getColumnIndexOrThrow(DatabaseInfo.CourseColumn.ECTS));
-            Integer year = results.getInt(results.getColumnIndexOrThrow(DatabaseInfo.CourseColumn.YEAR));
-            Double grade = results.getDouble(results.getColumnIndexOrThrow(DatabaseInfo.CourseColumn.GRADE));
-            Integer term = results.getInt(results.getColumnIndexOrThrow(DatabaseInfo.CourseColumn.TERM));
-            Boolean elective = Boolean.parseBoolean(results.getString(results.getColumnIndexOrThrow(DatabaseInfo.CourseColumn.ELECTIVE)));
-            if(grade < 5.5){
-                courseModels.add(new CourseModel(name, ects, null, year , term, elective, " "));
-            }
-        }
-        results.close();
-
-        Collections.sort(courseModels);
-
-        mAdapter = new AvailableCourseListAdapter(AvailableCoursesActivity.this, 0, courseModels);
-        mListView.setAdapter(mAdapter);
-
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +74,42 @@ public class AvailableCoursesActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new MandatoryCoursesFragment(), "Mandatory");
+        adapter.addFragment(new ElectiveCoursesFragment(), "Elective");
+        viewPager.setAdapter(adapter);
+    }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
     }
 
 }

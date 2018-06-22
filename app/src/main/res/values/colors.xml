@@ -4,6 +4,10 @@
     <color name="colorPrimaryDark">#007ac1</color>
     <color name="colorAccent">#e91e63</color>
 
+    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="navigationBarColor">#000000</color>
+
     <color name="ic_colorPrimaryDark">#65007ac1</color>
     <color name="passing_grade">#a3ffb0</color>
     <color name="failing_grade">#ff7a7a</color>

@@ -29,7 +29,6 @@ public class AvailableCourseListAdapter extends ArrayAdapter<CourseModel> {
             vh.year = (TextView) convertView.findViewById(R.id.cont_course_year);
             vh.term = (TextView) convertView.findViewById(R.id.cont_course_term);
             vh.ects = (TextView) convertView.findViewById(R.id.cont_course_ects);
-            vh.elective = (TextView) convertView.findViewById(R.id.cont_course_elective);
             convertView.setTag(vh);
         } else {
             vh = (ViewHolder) convertView.getTag();
@@ -39,11 +38,7 @@ public class AvailableCourseListAdapter extends ArrayAdapter<CourseModel> {
         vh.year.setText((CharSequence) "year: " + cm.getYear());
         vh.term.setText((CharSequence) "term: " + cm.getTerm());
         vh.ects.setText((CharSequence) "EC: " + cm.getEcts());
-        if (Boolean.parseBoolean(cm.getElective())){
-            vh.elective.setText((CharSequence) "Elective");
-        } else {
-            vh.elective.setText((CharSequence) "Mandatory");
-        }
+
 
 
         return convertView;
@@ -54,6 +49,5 @@ public class AvailableCourseListAdapter extends ArrayAdapter<CourseModel> {
         TextView year;
         TextView term;
         TextView ects;
-        TextView elective;
     }
 }

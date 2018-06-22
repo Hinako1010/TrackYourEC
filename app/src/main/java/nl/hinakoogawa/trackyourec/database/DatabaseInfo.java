@@ -18,6 +18,7 @@ public final class DatabaseInfo {
         public static final String TERM = "term";	// FINAL !
         public static final String ELECTIVE = "elective";
         public static final String NOTES = "notes";
+        public static final String ENROLLED = "enrolled";
     }
 
 }

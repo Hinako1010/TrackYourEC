@@ -8,7 +8,7 @@
     <LinearLayout
         android:id="@+id/row_first"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:orientation="horizontal">
 
         <TextView
@@ -42,7 +42,7 @@
     <LinearLayout
         android:id="@+id/row_second"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:orientation="horizontal">
 
         <TextView
@@ -73,5 +73,10 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/cont_course_notes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

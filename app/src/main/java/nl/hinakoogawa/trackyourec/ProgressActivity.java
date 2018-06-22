@@ -63,17 +63,24 @@ public class ProgressActivity extends AppCompatActivity {
                     passedCourses.getColumnIndexOrThrow(DatabaseInfo.CourseColumn._ID));
             itemIds.add(itemId);
             Integer ects = passedCourses.getInt(passedCourses.getColumnIndexOrThrow(DatabaseInfo.CourseColumn.ECTS));
-            Integer year = passedCourses.getInt(passedCourses.getColumnIndexOrThrow(DatabaseInfo.CourseColumn.YEAR));
+            Integer grade = passedCourses.getInt(passedCourses.getColumnIndexOrThrow(DatabaseInfo.CourseColumn.GRADE));
             Boolean elective = Boolean.parseBoolean(passedCourses.getString(passedCourses.getColumnIndexOrThrow(DatabaseInfo.CourseColumn.ELECTIVE)));
+            Boolean enrolled = Boolean.parseBoolean(passedCourses.getString(passedCourses.getColumnIndexOrThrow(DatabaseInfo.CourseColumn.ENROLLED)));
+            Log.w("yo", "yoyo");
 
-            if (elective == false){
-                mandatoryEcts += ects;
-            } else {
-                electiveEcts += ects;
+            if(grade > 5.4){
+                Log.d("el", passedCourses.getString(passedCourses.getColumnIndexOrThrow(DatabaseInfo.CourseColumn.ELECTIVE)));
+                if (!elective){
+                    mandatoryEcts += ects;
+                    Log.w("el", "mand");
+                } else {
+                    electiveEcts += ects;
+                    Log.w("el", "elect");
+                }
             }
-            currentEcts += ects;
         }
         passedCourses.close();
+        currentEcts = mandatoryEcts + electiveEcts;
 
         yValues.add(new Entry(mandatoryEcts, 0));
         xValues.add("Mandatory");

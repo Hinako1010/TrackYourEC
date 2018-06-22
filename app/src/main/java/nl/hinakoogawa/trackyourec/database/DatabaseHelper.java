@@ -12,7 +12,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static SQLiteDatabase rSQLDB;
     public static DatabaseHelper mInstance;
     public static final String dbName = "studieloopbaanapp.db";
-    public static final int dbVersion = 7; // versienr DB
+    public static int dbVersion = 15; // versienr DB
 
     public DatabaseHelper(Context ctx) {
         super(ctx, dbName, null, dbVersion);
@@ -39,7 +39,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 DatabaseInfo.CourseColumn.YEAR + " INTEGER," +
                 DatabaseInfo.CourseColumn.TERM + " INTEGER," +
                 DatabaseInfo.CourseColumn.ELECTIVE + " BOOLEAN," +
-                DatabaseInfo.CourseColumn.NOTES + " TEXT);"
+                DatabaseInfo.CourseColumn.NOTES + " TEXT," +
+                DatabaseInfo.CourseColumn.ENROLLED + " BOOLEAN);"
         );
     }
 
@@ -76,16 +77,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 DatabaseInfo.CourseColumn.GRADE,
                 DatabaseInfo.CourseColumn.TERM,
                 DatabaseInfo.CourseColumn.ELECTIVE,
+                DatabaseInfo.CourseColumn.NOTES,
+                DatabaseInfo.CourseColumn.ENROLLED,
 
         };
-
-// Filter results WHERE "title" = 'My Title'
-//        String selection = DatabaseInfo.CourseColumn.COURSENAME + " = ?";
-//        String[] selectionArgs = { "My Title" };
-
-// How you want the results sorted in the resulting Cursor
-//        String sortOrder =
-//                DatabaseInfo.CourseColumn.COLUMN_NAME_SUBTITLE + " DESC";
 
         Cursor cursor = rSQLDB.query(
                 DatabaseInfo.CourseTables.COURSETABLE,   // The table to query
@@ -100,40 +95,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public Cursor getGradedCourses(){
-// Define a projection that specifies which columns from the database
-// you will actually use after this query.
-        String[] projection = {
-                BaseColumns._ID,
-                DatabaseInfo.CourseColumn.COURSENAME,
-                DatabaseInfo.CourseColumn.ECTS,
-                DatabaseInfo.CourseColumn.YEAR,
-                DatabaseInfo.CourseColumn.TERM,
-                DatabaseInfo.CourseColumn.GRADE,
-                DatabaseInfo.CourseColumn.ELECTIVE,
-
-        };
-
-// Filter results WHERE "title" = 'My Title'
-//        String selection = DatabaseInfo.CourseColumn.COURSENAME + " IS NOT NULL";
-//        String[] selectionArgs = { "My Title" };
-
-// How you want the results sorted in the resulting Cursor
-//        String sortOrder =
-//                DatabaseInfo.CourseColumn.COLUMN_NAME_SUBTITLE + " DESC";
-
-        Cursor cursor = rSQLDB.query(
-                DatabaseInfo.CourseTables.COURSETABLE,   // The table to query
-                projection,             // The array of columns to return (pass null to get all)
-                null,              // The columns for the WHERE clause
-                null,          // The values for the WHERE clause
-                null,                   // don't group the rows
-                null,                   // don't filter by row groups
-                null               // The sort order
-        );
-
-        return cursor;
-    }
 
     public Cursor getPassedCourses(){
         // Define a projection that specifies which columns from the database
@@ -141,17 +102,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[] projection = {
                 BaseColumns._ID,
                 DatabaseInfo.CourseColumn.ECTS,
-                DatabaseInfo.CourseColumn.YEAR,
+                DatabaseInfo.CourseColumn.GRADE,
                 DatabaseInfo.CourseColumn.ELECTIVE,
+                DatabaseInfo.CourseColumn.ENROLLED,
         };
 
 // Filter results WHERE "title" = 'My Title'
         String selection = DatabaseInfo.CourseColumn.GRADE + ">?";
         String[] selectionArgs = { "0" };
-
-// How you want the results sorted in the resulting Cursor
-//        String sortOrder =
-//                DatabaseInfo.CourseColumn.COLUMN_NAME_SUBTITLE + " DESC";
 
         Cursor cursor = rSQLDB.query(
                 DatabaseInfo.CourseTables.COURSETABLE,   // The table to query
@@ -165,4 +123,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return cursor;
     }
+
 }// end class

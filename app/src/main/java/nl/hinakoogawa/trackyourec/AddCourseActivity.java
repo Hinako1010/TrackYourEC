@@ -18,6 +18,7 @@ import nl.hinakoogawa.trackyourec.models.CourseModel;
 public class AddCourseActivity extends AppCompatActivity {
 
     private Boolean elective;
+    private Boolean enrolled;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,6 @@ public class AddCourseActivity extends AppCompatActivity {
                 y.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "4")});
                 t.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "4")});
 
-
                 String name = n.getText().toString();
                 Integer ects = Integer.parseInt(ec.getText().toString());
                 Double grade = null;
@@ -58,7 +58,7 @@ public class AddCourseActivity extends AppCompatActivity {
                 Integer year = Integer.parseInt(y.getText().toString());
                 Integer term = Integer.parseInt(t.getText().toString());
 
-                CourseModel cm = new CourseModel(name, ects, grade, year, term, elective, null);
+                CourseModel cm = new CourseModel(name, ects, grade, year, term, elective, null, enrolled);
 
                 ContentValues cv = new ContentValues();
                 cv.put("coursename", cm.getName());
@@ -68,6 +68,7 @@ public class AddCourseActivity extends AppCompatActivity {
                 cv.put("term", cm.getTerm());
                 cv.put("elective", cm.getElective());
                 cv.put("notes", cm.getNotes());
+                cv.put("notes", cm.getEnrolled());
                 dbHelper.insert("CourseTable", null, cv);
                 Intent intent = new Intent(AddCourseActivity.this, AvailableCoursesActivity.class);
                 startActivity(intent);
@@ -84,10 +85,12 @@ public class AddCourseActivity extends AppCompatActivity {
             case R.id.course_elective:
                 if (checked){
                     elective = true;
+                    enrolled = false;
                 }
                 // Put some meat on the sandwich
             else {
                     elective = false;
+                    enrolled = true;
                 }
             break;
 
