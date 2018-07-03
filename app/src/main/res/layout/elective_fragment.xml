@@ -6,6 +6,27 @@
     tools:context="nl.hinakoogawa.trackyourec.MandatoryCoursesFragment">
 
     <!--fragment mand-->
+
+    <ImageView
+        android:id="@+id/img_database2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="37dp"
+        android:src="@mipmap/download"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_pull_course2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="37dp"
+        android:text="@string/tv_pull_course"
+        android:visibility="gone" />
+
     <ListView
         android:id="@+id/elective_list_view"
         android:layout_width="fill_parent"

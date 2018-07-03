@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -80,6 +81,16 @@ public class ElectiveCoursesFragment extends Fragment{
         mAdapter = new AvailableCourseListAdapter(getContext(), 0, courseModels);
         mListView.setAdapter(mAdapter);
 
+        TextView pullcourse = (TextView) getActivity().findViewById(R.id.tv_pull_course2);
+        ImageView firebase = (ImageView) getActivity().findViewById(R.id.img_database2);
+        if (courseModels.size() == 0) {
+            pullcourse.setVisibility(View.VISIBLE);
+            firebase.setVisibility(View.VISIBLE);
+        } else {
+            pullcourse.setVisibility(View.GONE);
+            firebase.setVisibility(View.GONE);
+        }
+
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(final AdapterView<?> adapterView, final View view, int position, long l) {
@@ -135,6 +146,8 @@ public class ElectiveCoursesFragment extends Fragment{
                 builder.show();
             }
         });
+
+
     }
 
     @Override

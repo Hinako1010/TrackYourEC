@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -132,6 +133,15 @@ public class MandatoryCoursesFragment extends Fragment {
         mAdapter = new AvailableCourseListAdapter(getContext(), 0, courseModels);
         mListView.setAdapter(mAdapter);
 
+        TextView pullcourse = (TextView) getActivity().findViewById(R.id.tv_pull_course);
+        ImageView firebase = (ImageView) getActivity().findViewById(R.id.img_database);
+        if (courseModels.size() == 0) {
+            pullcourse.setVisibility(View.VISIBLE);
+            firebase.setVisibility(View.VISIBLE);
+        } else {
+            pullcourse.setVisibility(View.GONE);
+            firebase.setVisibility(View.GONE);
+        }
     }
 
     @Override

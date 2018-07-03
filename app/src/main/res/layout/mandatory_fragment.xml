@@ -7,13 +7,32 @@
     tools:context="nl.hinakoogawa.trackyourec.MandatoryCoursesFragment">
 
     <!--fragment mand-->
-    <ListView
-    android:id="@+id/mandatory_list_view"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="0dp" />
+    <TextView
+        android:id="@+id/tv_pull_course"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="39dp"
+        android:text="@string/tv_pull_course"
+        android:visibility="gone" />
 
+    <ImageView
+        android:id="@+id/img_database"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="38dp"
+        android:src="@mipmap/download"
+        android:visibility="gone" />
+
+    <ListView
+        android:id="@+id/mandatory_list_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
 
 </RelativeLayout>

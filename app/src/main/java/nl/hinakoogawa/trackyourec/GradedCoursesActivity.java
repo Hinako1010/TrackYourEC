@@ -6,11 +6,13 @@ import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -41,15 +43,17 @@ public class GradedCoursesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graded_courses);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Graded courses");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         final DatabaseHelper dbHelper = DatabaseHelper.getHelper(GradedCoursesActivity.this);
 
         mListView = (ListView) findViewById(R.id.graded_list_view);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                  @Override
                  public void onItemClick(AdapterView<?> adapterView, final View view, int position, long l) {
-                     Toast t = Toast.makeText(GradedCoursesActivity.this,"Click" + position,Toast.LENGTH_LONG);
-                     t.show();
-
                      AlertDialog.Builder builder = new AlertDialog.Builder(GradedCoursesActivity.this);
                      builder.setTitle("Notes");
 
@@ -57,7 +61,9 @@ public class GradedCoursesActivity extends AppCompatActivity {
                      final EditText input_notes = new EditText(GradedCoursesActivity.this);
                      // Specify the type of input expected; decimal number
                      TextView old_note = (TextView) findViewById(R.id.cont_course_notes);
-                     input_notes.setText(old_note.getText().toString());
+                     String old_str = old_note.getText().toString();
+                     old_str = old_str.replace("notes: ", "");
+                     input_notes.setText(old_str);
                      input_notes.setInputType(InputType.TYPE_CLASS_TEXT);
                      builder.setView(input_notes);
 
@@ -114,6 +120,14 @@ public class GradedCoursesActivity extends AppCompatActivity {
         mAdapter = new GradedCourseListAdapter(GradedCoursesActivity.this, 0, courseModels);
         mListView.setAdapter(mAdapter);
 
-
+        TextView gradecourse = (TextView) findViewById(R.id.tv_grade_courses);
+        ImageView available = (ImageView) findViewById(R.id.img_available);
+        if (courseModels.size() == 0) {
+            gradecourse.setVisibility(View.VISIBLE);
+            available.setVisibility(View.VISIBLE);
+        } else {
+            gradecourse.setVisibility(View.GONE);
+            available.setVisibility(View.GONE);
+        }
     }
 }
